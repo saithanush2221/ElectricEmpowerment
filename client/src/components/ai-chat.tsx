@@ -38,6 +38,7 @@ export function AIChat() {
       const data = await response.json();
       setMessages(prev => [...prev, { role: "assistant", content: data.response }]);
     } catch (error) {
+      console.error("Chat error:", error);
       setMessages(prev => [...prev, { role: "assistant", content: "Sorry, I encountered an error. Please try again." }]);
     } finally {
       setIsLoading(false);

@@ -9,6 +9,9 @@ import {
   type InsertComment
 } from "@shared/schema";
 
+import fs from 'fs/promises';
+import path from 'path';
+
 export interface IStorage {
   // Vehicles
   getAllVehicles(): Promise<Vehicle[]>;
@@ -53,6 +56,34 @@ export class MemStorage implements IStorage {
       post: 1,
       comment: 1
     };
+
+    // Initialize with the vehicles from the JSON file
+    this.loadVehicles();
+  }
+
+  private async loadVehicles() {
+    try {
+      const filePath = path.join(process.cwd(), 'attached_assets', 'Pasted--id-1-type-4-wheeler-make-Tata-model--1739255624792.txt');
+      const data = await fs.readFile(filePath, 'utf-8');
+      const vehiclesList = JSON.parse(data);
+
+      vehiclesList.forEach((v: any) => {
+        const vehicle: Vehicle = {
+          id: v.id,
+          name: v.model,
+          manufacturer: v.make,
+          range: v.range || null,
+          batteryCapacity: v.battery || null,
+          price: v.price,
+          maintenanceCost: v.maintenance_cost,
+          fuelSavings: v.savings_per_km ? Math.round(v.savings_per_km * 15000) : null,
+          imageUrl: v.image
+        };
+        this.vehicles.set(v.id, vehicle);
+      });
+    } catch (error) {
+      console.error('Error loading vehicles:', error);
+    }
   }
 
   // Vehicles
