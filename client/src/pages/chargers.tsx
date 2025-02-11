@@ -14,7 +14,7 @@ const DEFAULT_ZOOM = 11;
 export default function Chargers() {
   const [search, setSearch] = useState("");
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY || "",
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "",
   });
 
   const { data: stations, isLoading } = useQuery<ChargingStation[]>({

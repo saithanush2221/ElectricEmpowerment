@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Badge } from "@/components/ui/badge";
 import type { Vehicle } from "@shared/schema";
 
 export default function Compare() {
@@ -20,25 +21,46 @@ export default function Compare() {
   const ComparisonCard = ({ vehicle }: { vehicle: Vehicle | undefined }) => (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>{vehicle?.name || "Select a vehicle"}</CardTitle>
+        <CardTitle>{vehicle ? `${vehicle.manufacturer} ${vehicle.name}` : "Select a vehicle"}</CardTitle>
       </CardHeader>
       <CardContent>
         {vehicle ? (
-          <>
+          <div className="space-y-4">
             <img
               src={vehicle.imageUrl}
-              alt={vehicle.name}
+              alt={`${vehicle.manufacturer} ${vehicle.name}`}
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
+            <div className="flex flex-wrap gap-2 mb-4">
+              <Badge variant="secondary">
+                {vehicle.fuelType.toUpperCase()}
+              </Badge>
+              {vehicle.range && (
+                <Badge variant="secondary">
+                  Range: {vehicle.range} km
+                </Badge>
+              )}
+              {vehicle.batteryCapacity && (
+                <Badge variant="secondary">
+                  Battery: {vehicle.batteryCapacity} kWh
+                </Badge>
+              )}
+              {vehicle.fuelEconomy && (
+                <Badge variant="secondary">
+                  Economy: {vehicle.fuelEconomy} km/L
+                </Badge>
+              )}
+            </div>
             <div className="space-y-2">
               <p><span className="font-semibold">Manufacturer:</span> {vehicle.manufacturer}</p>
-              <p><span className="font-semibold">Range:</span> {vehicle.range} miles</p>
-              <p><span className="font-semibold">Battery:</span> {vehicle.batteryCapacity} kWh</p>
-              <p><span className="font-semibold">Price:</span> ${vehicle.price.toLocaleString()}</p>
-              <p><span className="font-semibold">Maintenance:</span> ${vehicle.maintenanceCost}/year</p>
-              <p><span className="font-semibold">Fuel Savings:</span> ${vehicle.fuelSavings}/year</p>
+              <p><span className="font-semibold">Type:</span> {vehicle.type}</p>
+              <p><span className="font-semibold">Price:</span> ₹{vehicle.price.toLocaleString()}</p>
+              <p><span className="font-semibold">Maintenance:</span> ₹{vehicle.maintenanceCost.toLocaleString()}/year</p>
+              {vehicle.fuelSavings && (
+                <p><span className="font-semibold">Fuel Savings:</span> ₹{vehicle.fuelSavings.toLocaleString()}/year</p>
+              )}
             </div>
-          </>
+          </div>
         ) : (
           <div className="h-48 bg-muted rounded-lg flex items-center justify-center">
             Select a vehicle to compare
@@ -55,8 +77,8 @@ export default function Compare() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-4xl font-bold mb-8">Compare Electric Vehicles</h1>
-        
+        <h1 className="text-4xl font-bold mb-8">Compare Vehicles</h1>
+
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Skeleton className="h-[500px]" />
@@ -65,7 +87,7 @@ export default function Compare() {
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-              <Select onValueChange={setVehicle1Id}>
+              <Select value={vehicle1Id} onValueChange={setVehicle1Id}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select first vehicle" />
                 </SelectTrigger>
@@ -78,7 +100,7 @@ export default function Compare() {
                 </SelectContent>
               </Select>
 
-              <Select onValueChange={setVehicle2Id}>
+              <Select value={vehicle2Id} onValueChange={setVehicle2Id}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select second vehicle" />
                 </SelectTrigger>
