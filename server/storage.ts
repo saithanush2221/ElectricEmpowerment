@@ -70,14 +70,17 @@ export class MemStorage implements IStorage {
       vehiclesList.forEach((v: any) => {
         const vehicle: Vehicle = {
           id: v.id,
-          name: v.model,
-          manufacturer: v.make,
+          name: v.model || '',
+          manufacturer: v.make || '',
+          type: v.type || '',
+          fuelType: v.fuel_type || '',
           range: v.range || null,
           batteryCapacity: v.battery || null,
           price: v.price,
           maintenanceCost: v.maintenance_cost,
           fuelSavings: v.savings_per_km ? Math.round(v.savings_per_km * 15000) : null,
-          imageUrl: v.image
+          imageUrl: v.image || '',
+          fuelEconomy: v.fuel_economy || null,
         };
         this.vehicles.set(v.id, vehicle);
       });

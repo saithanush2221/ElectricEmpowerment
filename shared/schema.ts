@@ -6,12 +6,15 @@ export const vehicles = pgTable("vehicles", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
   manufacturer: text("manufacturer").notNull(),
-  range: integer("range").notNull(),
-  batteryCapacity: integer("battery_capacity").notNull(),
+  range: integer("range"),
+  batteryCapacity: integer("battery_capacity"),
   price: integer("price").notNull(),
   maintenanceCost: integer("maintenance_cost").notNull(),
-  fuelSavings: integer("fuel_savings").notNull(),
-  imageUrl: text("image_url").notNull()
+  fuelSavings: integer("fuel_savings"),
+  imageUrl: text("image_url").notNull(),
+  type: text("type").notNull(),
+  fuelType: text("fuel_type").notNull(),
+  fuelEconomy: integer("fuel_economy"),
 });
 
 export const chargingStations = pgTable("charging_stations", {
