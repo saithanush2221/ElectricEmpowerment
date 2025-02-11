@@ -26,11 +26,11 @@ export default function Vehicles() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-4xl font-bold mb-8">Electric Vehicles</h1>
+        <h1 className="text-4xl font-bold mb-8">Explore Electric Vehicles</h1>
 
         <div className="mb-8">
           <Input
-            placeholder="Search vehicles..."
+            placeholder="Search vehicles by name or manufacturer..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="max-w-md"
@@ -52,41 +52,49 @@ export default function Vehicles() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
               >
-                <Card className="h-full">
+                <Card className="h-full hover:shadow-lg transition-shadow">
                   <CardHeader>
-                    <img
-                      src={vehicle.imageUrl}
-                      alt={vehicle.name}
-                      className="w-full h-48 object-cover rounded-lg"
-                    />
-                    <CardTitle className="mt-4">
+                    <div className="relative aspect-video mb-4">
+                      <img
+                        src={vehicle.imageUrl || "https://images.unsplash.com/photo-1593018931925-c18bb72e6bf0"}
+                        alt={vehicle.name}
+                        className="w-full h-48 object-cover rounded-lg"
+                      />
+                    </div>
+                    <CardTitle>
                       {vehicle.manufacturer} {vehicle.name}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
                       <div className="flex flex-wrap gap-2">
-                        <Badge variant="secondary">
-                          Range: {vehicle.range} miles
-                        </Badge>
-                        <Badge variant="secondary">
-                          Battery: {vehicle.batteryCapacity} kWh
-                        </Badge>
+                        {vehicle.range && (
+                          <Badge variant="secondary">
+                            Range: {vehicle.range} km
+                          </Badge>
+                        )}
+                        {vehicle.batteryCapacity && (
+                          <Badge variant="secondary">
+                            Battery: {vehicle.batteryCapacity} kWh
+                          </Badge>
+                        )}
                       </div>
-                      
+
                       <div className="space-y-2">
                         <p>
                           <span className="font-semibold">Price:</span>{" "}
-                          ${vehicle.price.toLocaleString()}
+                          ₹{vehicle.price.toLocaleString()}
                         </p>
                         <p>
                           <span className="font-semibold">Maintenance:</span>{" "}
-                          ${vehicle.maintenanceCost}/year
+                          ₹{vehicle.maintenanceCost}/year
                         </p>
-                        <p>
-                          <span className="font-semibold">Fuel Savings:</span>{" "}
-                          ${vehicle.fuelSavings}/year
-                        </p>
+                        {vehicle.fuelSavings && (
+                          <p>
+                            <span className="font-semibold">Fuel Savings:</span>{" "}
+                            ₹{vehicle.fuelSavings}/year
+                          </p>
+                        )}
                       </div>
                     </div>
                   </CardContent>
