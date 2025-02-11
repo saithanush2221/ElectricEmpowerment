@@ -15,19 +15,8 @@ export function registerRoutes(app: Express): Server {
   // Vehicles
   api.get("/vehicles", async (_req, res) => {
     try {
-      // Get the data from the file for now
       const vehicles = await storage.getAllVehicles();
-      res.json(vehicles.map(vehicle => ({
-        id: vehicle.id,
-        name: vehicle.model,
-        manufacturer: vehicle.make,
-        range: vehicle.range || null,
-        batteryCapacity: vehicle.battery || null,
-        price: vehicle.price,
-        maintenanceCost: vehicle.maintenance_cost,
-        fuelSavings: vehicle.savings_per_km ? Math.round(vehicle.savings_per_km * 15000) : null, // Estimated yearly savings
-        imageUrl: vehicle.image
-      })));
+      res.json(vehicles);
     } catch (error) {
       console.error("Error fetching vehicles:", error);
       res.status(500).json({ error: "Failed to fetch vehicles" });
@@ -102,7 +91,7 @@ export function registerRoutes(app: Express): Server {
       }
 
       const completion = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo", // Changed from gpt-4 to gpt-3.5-turbo
+        model: "gpt-3.5-turbo", 
         messages: [
           {
             role: "system",

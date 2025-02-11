@@ -21,7 +21,9 @@ export default function Compare() {
   const ComparisonCard = ({ vehicle }: { vehicle: Vehicle | undefined }) => (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>{vehicle ? `${vehicle.manufacturer} ${vehicle.name}` : "Select a vehicle"}</CardTitle>
+        <CardTitle>
+          {vehicle ? `${vehicle.manufacturer} ${vehicle.name}` : "Select a vehicle"}
+        </CardTitle>
       </CardHeader>
       <CardContent>
         {vehicle ? (
@@ -32,9 +34,11 @@ export default function Compare() {
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
             <div className="flex flex-wrap gap-2 mb-4">
-              <Badge variant="secondary">
-                {vehicle.fuelType.toUpperCase()}
-              </Badge>
+              {vehicle.fuelType && (
+                <Badge variant="secondary">
+                  {vehicle.fuelType.toUpperCase()}
+                </Badge>
+              )}
               {vehicle.range && (
                 <Badge variant="secondary">
                   Range: {vehicle.range} km
@@ -54,10 +58,19 @@ export default function Compare() {
             <div className="space-y-2">
               <p><span className="font-semibold">Manufacturer:</span> {vehicle.manufacturer}</p>
               <p><span className="font-semibold">Type:</span> {vehicle.type}</p>
-              <p><span className="font-semibold">Price:</span> ₹{vehicle.price.toLocaleString()}</p>
-              <p><span className="font-semibold">Maintenance:</span> ₹{vehicle.maintenanceCost.toLocaleString()}/year</p>
+              <p>
+                <span className="font-semibold">Price:</span>{" "}
+                ₹{vehicle.price.toLocaleString()}
+              </p>
+              <p>
+                <span className="font-semibold">Maintenance:</span>{" "}
+                ₹{vehicle.maintenanceCost.toLocaleString()}/year
+              </p>
               {vehicle.fuelSavings && (
-                <p><span className="font-semibold">Fuel Savings:</span> ₹{vehicle.fuelSavings.toLocaleString()}/year</p>
+                <p>
+                  <span className="font-semibold">Fuel Savings:</span>{" "}
+                  ₹{vehicle.fuelSavings.toLocaleString()}/year
+                </p>
               )}
             </div>
           </div>
@@ -94,7 +107,7 @@ export default function Compare() {
                 <SelectContent>
                   {vehicles?.map((vehicle) => (
                     <SelectItem key={vehicle.id} value={vehicle.id.toString()}>
-                      {vehicle.manufacturer} {vehicle.name}
+                      {`${vehicle.manufacturer} ${vehicle.name}`}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -107,7 +120,7 @@ export default function Compare() {
                 <SelectContent>
                   {vehicles?.map((vehicle) => (
                     <SelectItem key={vehicle.id} value={vehicle.id.toString()}>
-                      {vehicle.manufacturer} {vehicle.name}
+                      {`${vehicle.manufacturer} ${vehicle.name}`}
                     </SelectItem>
                   ))}
                 </SelectContent>
