@@ -90,23 +90,34 @@ export function registerRoutes(app: Express): Server {
         return res.status(500).json({ error: "OpenAI API key not configured" });
       }
 
-      const completion = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo", 
-        messages: [
-          {
-            role: "system",
-            content: "You are an expert on electric vehicles and sustainability. Provide helpful, accurate, and concise information about EVs, charging, maintenance, and related topics. Keep responses under 150 words and focus on practical advice."
-          },
-          { role: "user", content: message }
-        ],
-        temperature: 0.7,
-        max_tokens: 200,
-      });
+      try {
+        const completion = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo", 
+          messages: [
+            {
+              role: "system",
+              content: "You are an expert on electric vehicles and sustainability. Provide helpful, accurate, and concise information about EVs, charging, maintenance, and related topics. Keep responses under 150 words and focus on practical advice."
+            },
+            { role: "user", content: message }
+          ],
+          temperature: 0.7,
+          max_tokens: 200,
+        });
 
-      res.json({ response: completion.choices[0].message.content });
+        res.json({ response: completion.choices[0].message.content });
+      } catch (error: any) {
+        if (error?.status === 429) {
+          return res.status(429).json({ 
+            error: "The AI service is currently experiencing high demand. Please try again in a few minutes." 
+          });
+        }
+        throw error;
+      }
     } catch (error) {
       console.error("Chat error:", error);
-      res.status(500).json({ error: "Failed to process chat request" });
+      res.status(500).json({ 
+        error: "Failed to process chat request. Please try again later." 
+      });
     }
   });
 
