@@ -1,72 +1,117 @@
 import type { Vehicle, ChargingStation } from "@shared/schema";
 
 // Update initial vehicles data
-export const initialVehicles = [
+export const initialVehicles: Vehicle[] = [
+  // Electric Vehicles Only
   {
     id: 1,
-    name: "Model S",
-    manufacturer: "Tesla",
-    range: 405,
-    batteryCapacity: 100,
-    price: 89990,
-    maintenanceCost: 1200,
-    fuelSavings: 2500,
+    name: "Nexon EV",
+    manufacturer: "Tata",
+    range: 312,
+    batteryCapacity: 30,
+    price: 1499000,
+    maintenanceCost: 5000,
+    fuelSavings: 45000, // Calculated from fuel_cost_per_km savings
     imageUrl: "https://images.unsplash.com/photo-1593018931925-c18bb72e6bf0"
   },
   {
     id: 2,
-    name: "ID.4",
-    manufacturer: "Volkswagen",
-    range: 280,
-    batteryCapacity: 82,
-    price: 41230,
-    maintenanceCost: 900,
-    fuelSavings: 2000,
+    name: "ZS EV",
+    manufacturer: "MG",
+    range: 419,
+    batteryCapacity: 44,
+    price: 2199000,
+    maintenanceCost: 6000,
+    fuelSavings: 50000,
     imageUrl: "https://images.unsplash.com/photo-1624623864107-ef79f850b554"
   },
   {
     id: 3,
-    name: "Ioniq 5",
+    name: "Kona Electric",
     manufacturer: "Hyundai",
-    range: 303,
-    batteryCapacity: 77,
-    price: 45500,
-    maintenanceCost: 850,
-    fuelSavings: 2200,
-    imageUrl: "https://images.unsplash.com/photo-1738794373116-e7d5dee59dcc"
-  },
-  {
-    id: 4,
-    name: "EV6",
-    manufacturer: "Kia",
-    range: 310,
-    batteryCapacity: 77,
-    price: 48700,
-    maintenanceCost: 800,
-    fuelSavings: 2300,
+    range: 452,
+    batteryCapacity: 39,
+    price: 2379000,
+    maintenanceCost: 7000,
+    fuelSavings: 52000,
     imageUrl: "https://images.unsplash.com/photo-1652509525608-6b44097ea5a7"
   },
   {
-    id: 5,
-    name: "Mustang Mach-E",
-    manufacturer: "Ford",
-    range: 314,
-    batteryCapacity: 88,
-    price: 45995,
-    maintenanceCost: 900,
-    fuelSavings: 2100,
+    id: 4,
+    name: "XUV400",
+    manufacturer: "Mahindra",
+    range: 375,
+    batteryCapacity: 39,
+    price: 1599000,
+    maintenanceCost: 5500,
+    fuelSavings: 48000,
     imageUrl: "https://images.unsplash.com/photo-1664298308851-5e934de2e153"
   },
   {
-    id: 6,
-    name: "Ariya",
-    manufacturer: "Nissan",
-    range: 300,
-    batteryCapacity: 87,
-    price: 43190,
-    maintenanceCost: 850,
-    fuelSavings: 2000,
+    id: 5,
+    name: "Tiago EV",
+    manufacturer: "Tata",
+    range: 315,
+    batteryCapacity: 24,
+    price: 869000,
+    maintenanceCost: 4500,
+    fuelSavings: 40000,
     imageUrl: "https://images.unsplash.com/photo-1687930721611-d1c55113e54b"
+  },
+  {
+    id: 6,
+    name: "Atto 3",
+    manufacturer: "BYD",
+    range: 521,
+    batteryCapacity: 60,
+    price: 3399000,
+    maintenanceCost: 8000,
+    fuelSavings: 60000,
+    imageUrl: "https://images.unsplash.com/photo-1593018931419-96adfd5b182d"
+  },
+  {
+    id: 7,
+    name: "eC3",
+    manufacturer: "Citroen",
+    range: 320,
+    batteryCapacity: 29,
+    price: 1150000,
+    maintenanceCost: 4800,
+    fuelSavings: 45000,
+    imageUrl: "https://images.unsplash.com/photo-1663008519764-0616547c493a"
+  },
+  {
+    id: 8,
+    name: "i4",
+    manufacturer: "BMW",
+    range: 590,
+    batteryCapacity: 80,
+    price: 7390000,
+    maintenanceCost: 12000,
+    fuelSavings: 65000,
+    imageUrl: "https://images.unsplash.com/photo-1671602472505-5830833ecb70"
+  },
+  {
+    id: 9,
+    name: "e-tron",
+    manufacturer: "Audi",
+    range: 484,
+    batteryCapacity: 71,
+    price: 10170000,
+    maintenanceCost: 13000,
+    fuelSavings: 70000,
+    imageUrl: "https://images.unsplash.com/photo-1592599457638-3ae7ccfbe065"
+  },
+  {
+    id: 10,
+    name: "Ioniq 5",
+    manufacturer: "Hyundai",
+    range: 481,
+    batteryCapacity: 58,
+    price: 4600000,
+    maintenanceCost: 5500,
+    fuelSavings: 50000,
+    imageUrl: "https://images.unsplash.com/photo-1738794373116-e7d5dee59dcc"
   }
 ];
 
