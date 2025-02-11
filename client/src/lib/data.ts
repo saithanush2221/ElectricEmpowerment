@@ -1,7 +1,7 @@
 import type { Vehicle, ChargingStation } from "@shared/schema";
 
-// Initial vehicle data
-export const initialVehicles: Vehicle[] = [
+// Update initial vehicles data
+export const initialVehicles = [
   {
     id: 1,
     name: "Model S",
@@ -34,6 +34,39 @@ export const initialVehicles: Vehicle[] = [
     maintenanceCost: 850,
     fuelSavings: 2200,
     imageUrl: "https://images.unsplash.com/photo-1738794373116-e7d5dee59dcc"
+  },
+  {
+    id: 4,
+    name: "EV6",
+    manufacturer: "Kia",
+    range: 310,
+    batteryCapacity: 77,
+    price: 48700,
+    maintenanceCost: 800,
+    fuelSavings: 2300,
+    imageUrl: "https://images.unsplash.com/photo-1652509525608-6b44097ea5a7"
+  },
+  {
+    id: 5,
+    name: "Mustang Mach-E",
+    manufacturer: "Ford",
+    range: 314,
+    batteryCapacity: 88,
+    price: 45995,
+    maintenanceCost: 900,
+    fuelSavings: 2100,
+    imageUrl: "https://images.unsplash.com/photo-1664298308851-5e934de2e153"
+  },
+  {
+    id: 6,
+    name: "Ariya",
+    manufacturer: "Nissan",
+    range: 300,
+    batteryCapacity: 87,
+    price: 43190,
+    maintenanceCost: 850,
+    fuelSavings: 2000,
+    imageUrl: "https://images.unsplash.com/photo-1687930721611-d1c55113e54b"
   }
 ];
 

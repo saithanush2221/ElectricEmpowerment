@@ -3,6 +3,11 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertVehicleSchema, insertPostSchema, insertCommentSchema } from "@shared/schema";
+import OpenAI from "openai";
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
 
 export function registerRoutes(app: Express): Server {
   const api = Router();
@@ -66,6 +71,37 @@ export function registerRoutes(app: Express): Server {
     }
     const comment = await storage.createComment(result.data);
     res.status(201).json(comment);
+  });
+
+  api.post("/chat", async (req, res) => {
+    try {
+      const { message } = req.body;
+      if (!message) {
+        return res.status(400).json({ error: "Message is required" });
+      }
+
+      if (!process.env.OPENAI_API_KEY) {
+        return res.status(500).json({ error: "OpenAI API key not configured" });
+      }
+
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4",
+        messages: [
+          {
+            role: "system",
+            content: "You are an expert on electric vehicles and sustainability. Provide helpful, accurate, and concise information about EVs, charging, maintenance, and related topics. Keep responses under 150 words and focus on practical advice."
+          },
+          { role: "user", content: message }
+        ],
+        temperature: 0.7,
+        max_tokens: 200,
+      });
+
+      res.json({ response: completion.choices[0].message.content });
+    } catch (error) {
+      console.error("Chat error:", error);
+      res.status(500).json({ error: "Failed to process chat request" });
+    }
   });
 
   app.use("/api", api);
