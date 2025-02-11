@@ -3,12 +3,19 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import type { ChargingStation } from "@shared/schema";
 import { MapPin } from "lucide-react";
+import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
+
+const DEFAULT_CENTER = { lat: 40.7128, lng: -74.0060 }; // New York City
+const DEFAULT_ZOOM = 11;
 
 export default function Chargers() {
   const [search, setSearch] = useState("");
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY || "",
+  });
 
   const { data: stations, isLoading } = useQuery<ChargingStation[]>({
     queryKey: ["/api/charging-stations"],
@@ -19,6 +26,17 @@ export default function Chargers() {
     station.address.toLowerCase().includes(search.toLowerCase())
   );
 
+  const mapMarkers = useMemo(() => {
+    if (!filteredStations) return [];
+    return filteredStations.map((station) => ({
+      position: {
+        lat: parseFloat(station.latitude),
+        lng: parseFloat(station.longitude),
+      },
+      title: station.name,
+    }));
+  }, [filteredStations]);
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <motion.div
@@ -27,15 +45,15 @@ export default function Chargers() {
         transition={{ duration: 0.5 }}
       >
         <div className="flex flex-col md:flex-row gap-8 items-start">
-          <div className="w-full md:w-1/2 lg:w-2/3">
+          <div className="w-full md:w-1/2 lg:w-2/5">
             <h1 className="text-4xl font-bold mb-8">Charging Stations</h1>
-            
+
             <div className="mb-8">
               <Input
                 placeholder="Search by name or address..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="max-w-md"
+                className="w-full"
               />
             </div>
 
@@ -46,7 +64,7 @@ export default function Chargers() {
                 <Skeleton className="h-[100px]" />
               </div>
             ) : (
-              <div className="grid gap-4">
+              <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
                 {filteredStations?.map((station) => (
                   <motion.div
                     key={station.id}
@@ -71,34 +89,31 @@ export default function Chargers() {
             )}
           </div>
 
-          <div className="w-full md:w-1/2 lg:w-1/3">
-            <Card>
-              <CardHeader>
-                <CardTitle>Featured Charging Location</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <img
-                  src="https://images.unsplash.com/photo-1663008519764-0616547c493a"
-                  alt="Charging Station"
-                  className="w-full h-48 object-cover rounded-lg mb-4"
-                />
-                <h3 className="text-xl font-semibold mb-2">Fast Charging Hub</h3>
-                <p className="text-muted-foreground mb-4">
-                  Experience rapid charging with our state-of-the-art facilities.
-                  Multiple charging points available 24/7.
-                </p>
-                <div className="grid grid-cols-2 gap-4">
-                  <img
-                    src="https://images.unsplash.com/photo-1732193998117-97b3b2994323"
-                    alt="Charging Detail 1"
-                    className="w-full h-24 object-cover rounded-lg"
-                  />
-                  <img
-                    src="https://images.unsplash.com/photo-1707341597123-c53bbb7e7f93"
-                    alt="Charging Detail 2"
-                    className="w-full h-24 object-cover rounded-lg"
-                  />
-                </div>
+          <div className="w-full md:w-1/2 lg:w-3/5 h-[700px]">
+            <Card className="h-full">
+              <CardContent className="p-0 h-full">
+                {!isLoaded ? (
+                  <div className="w-full h-full bg-muted animate-pulse" />
+                ) : (
+                  <GoogleMap
+                    mapContainerClassName="w-full h-full rounded-lg"
+                    center={DEFAULT_CENTER}
+                    zoom={DEFAULT_ZOOM}
+                    options={{
+                      streetViewControl: false,
+                      mapTypeControl: false,
+                      fullscreenControl: false,
+                    }}
+                  >
+                    {mapMarkers.map((marker, index) => (
+                      <MarkerF
+                        key={index}
+                        position={marker.position}
+                        title={marker.title}
+                      />
+                    ))}
+                  </GoogleMap>
+                )}
               </CardContent>
             </Card>
           </div>

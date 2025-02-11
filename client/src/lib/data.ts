@@ -75,23 +75,37 @@ export const initialChargingStations: ChargingStation[] = [
   {
     id: 1,
     name: "Downtown Supercharger",
-    latitude: "40.7128",
-    longitude: "-74.0060",
-    address: "123 Main St, New York, NY"
+    latitude: "40.7505",
+    longitude: "-73.9934",
+    address: "350 5th Ave, New York, NY 10118"
   },
   {
     id: 2,
-    name: "City Center Station",
-    latitude: "34.0522",
-    longitude: "-118.2437",
-    address: "456 Oak Ave, Los Angeles, CA"
+    name: "Brooklyn Station",
+    latitude: "40.6782",
+    longitude: "-73.9442",
+    address: "123 Atlantic Ave, Brooklyn, NY 11217"
   },
   {
     id: 3,
-    name: "Mall Charging Hub",
-    latitude: "41.8781",
-    longitude: "-87.6298",
-    address: "789 Pine Rd, Chicago, IL"
+    name: "Queens Mall Charging Hub",
+    latitude: "40.7282",
+    longitude: "-73.8731",
+    address: "90-15 Queens Blvd, Queens, NY 11373"
+  },
+  {
+    id: 4,
+    name: "Battery Park Charger",
+    latitude: "40.7033",
+    longitude: "-74.0170",
+    address: "21 West St, New York, NY 10006"
+  },
+  {
+    id: 5,
+    name: "Central Park Station",
+    latitude: "40.7829",
+    longitude: "-73.9654",
+    address: "Central Park West, New York, NY 10024"
   }
 ];
 
