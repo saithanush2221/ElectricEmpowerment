@@ -1,4 +1,3 @@
-
 import type { Vehicle, ChargingStation } from "@shared/schema";
 
 // Complete vehicle data
@@ -115,6 +114,19 @@ export const initialVehicles: Vehicle[] = [
     maintenanceCost: 4800,
     fuelSavings: 45000,
     imageUrl: "/assets/citroen_ec3.jpg"
+  },
+  {
+    id: 208,
+    name: "iX",
+    manufacturer: "BMW",
+    type: "4-wheeler",
+    fuelType: "electric",
+    range: 425,
+    batteryCapacity: 76.6,
+    price: 12000000,
+    maintenanceCost: 11000,
+    fuelSavings: 65000,
+    imageUrl: "/assets/bmw_ix.jpg"
   }
 ];
 
@@ -123,7 +135,7 @@ export const initialChargingStations: ChargingStation[] = [
   {
     id: 1,
     name: "Downtown Supercharger",
-    latitude: "40.7505",
+    latitude: "40.7505", 
     longitude: "-73.9934",
     address: "350 5th Ave, New York, NY 10118"
   },
@@ -131,7 +143,7 @@ export const initialChargingStations: ChargingStation[] = [
     id: 2,
     name: "Brooklyn Station",
     latitude: "40.6782",
-    longitude: "-73.9442",
+    longitude: "-73.9442", 
     address: "123 Atlantic Ave, Brooklyn, NY 11217"
   }
 ];
