@@ -10,6 +10,8 @@ import Community from "@/pages/community";
 import Chargers from "@/pages/chargers";
 import Vehicles from "@/pages/vehicles";
 import Learn from "@/pages/learn";
+import { AIChat } from "@/components/ai-chat";
+
 function Router() {
   return (
     <Switch>
@@ -32,6 +34,7 @@ function App() {
         <main>
           <Router />
         </main>
+        <AIChat />
       </div>
       <Toaster />
     </QueryClientProvider>
