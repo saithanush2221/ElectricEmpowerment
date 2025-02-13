@@ -1,3 +1,4 @@
+
 import type { Vehicle, ChargingStation } from "@shared/schema";
 
 // Update initial vehicles data
@@ -6,43 +7,77 @@ export const initialVehicles: Vehicle[] = [
     id: 1,
     name: "Nexon EV",
     manufacturer: "Tata",
-    type: "Electric",
-    fuelType: "Electric",
+    type: "4-wheeler",
+    fuelType: "electric",
     range: 312,
-    batteryCapacity: 30,
+    batteryCapacity: 30.2,
     price: 1499000,
     maintenanceCost: 5000,
     fuelSavings: 45000,
-    imageUrl: "https://images.unsplash.com/photo-1593018931925-c18bb72e6bf0",
-    fuelEconomy: null
+    imageUrl: "/assets/tata_nexon_ev.jpg"
   },
   {
     id: 2,
-    name: "ZS EV",
-    manufacturer: "MG",
-    type: "Electric",
-    fuelType: "Electric",
-    range: 419,
-    batteryCapacity: 44,
-    price: 2199000,
-    maintenanceCost: 6000,
-    fuelSavings: 50000,
-    imageUrl: "https://images.unsplash.com/photo-1624623864107-ef79f850b554",
-    fuelEconomy: null
+    name: "Swift",
+    manufacturer: "Maruti Suzuki",
+    type: "4-wheeler",
+    fuelType: "petrol",
+    fuelEconomy: 22,
+    price: 700000,
+    maintenanceCost: 4000,
+    imageUrl: "/assets/maruti_swift.jpg"
   },
   {
     id: 3,
+    name: "ZS EV",
+    manufacturer: "MG",
+    type: "4-wheeler",
+    fuelType: "electric",
+    range: 419,
+    batteryCapacity: 44.5,
+    price: 2199000,
+    maintenanceCost: 6000,
+    fuelSavings: 50000,
+    imageUrl: "/assets/mg_zs_ev.jpg"
+  },
+  {
+    id: 4,
     name: "Kona Electric",
     manufacturer: "Hyundai",
-    type: "Electric",
-    fuelType: "Electric",
+    type: "4-wheeler",
+    fuelType: "electric",
     range: 452,
-    batteryCapacity: 39,
+    batteryCapacity: 39.2,
     price: 2379000,
     maintenanceCost: 7000,
     fuelSavings: 52000,
-    imageUrl: "https://images.unsplash.com/photo-1652509525608-6b44097ea5a7",
-    fuelEconomy: null
+    imageUrl: "/assets/hyundai_kona_electric.jpg"
+  },
+  {
+    id: 5,
+    name: "XUV400",
+    manufacturer: "Mahindra",
+    type: "4-wheeler",
+    fuelType: "electric",
+    range: 375,
+    batteryCapacity: 39.4,
+    price: 1599000,
+    maintenanceCost: 5500,
+    fuelSavings: 48000,
+    imageUrl: "/assets/mahindra_xuv400.jpg"
+  },
+  {
+    id: 6,
+    name: "Tiago EV",
+    manufacturer: "Tata",
+    type: "4-wheeler",
+    fuelType: "electric",
+    range: 315,
+    batteryCapacity: 24,
+    price: 869000,
+    maintenanceCost: 4500,
+    fuelSavings: 40000,
+    imageUrl: "/assets/tata_tiago_ev.jpg"
   }
 ];
 
