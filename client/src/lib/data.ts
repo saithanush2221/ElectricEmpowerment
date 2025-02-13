@@ -135,7 +135,7 @@ export const initialChargingStations: ChargingStation[] = [
   {
     id: 1,
     name: "Downtown Supercharger",
-    latitude: "40.7505", 
+    latitude: "40.7505",
     longitude: "-73.9934",
     address: "350 5th Ave, New York, NY 10118"
   },
@@ -143,7 +143,7 @@ export const initialChargingStations: ChargingStation[] = [
     id: 2,
     name: "Brooklyn Station",
     latitude: "40.6782",
-    longitude: "-73.9442", 
+    longitude: "-73.9442",
     address: "123 Atlantic Ave, Brooklyn, NY 11217"
   }
 ];
