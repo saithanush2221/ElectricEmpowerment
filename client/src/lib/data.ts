@@ -1,5 +1,5 @@
 import type { Vehicle, ChargingStation } from "@shared/schema";
-import vehiclesData from "../../assets/vehicles.json";
+import vehiclesData from "../assets/vehicles.json";
 
 // Transform the JSON data to match our Vehicle schema
 export const initialVehicles: Vehicle[] = vehiclesData.map(v => ({
