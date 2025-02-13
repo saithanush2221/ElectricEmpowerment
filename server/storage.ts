@@ -63,26 +63,9 @@ export class MemStorage implements IStorage {
 
   private async loadVehicles() {
     try {
-      const filePath = path.join(process.cwd(), 'attached_assets', 'Pasted--id-1-type-4-wheeler-make-Tata-model--1739255624792.txt');
-      const data = await fs.readFile(filePath, 'utf-8');
-      const vehiclesList = JSON.parse(data);
-
-      vehiclesList.forEach((v: any) => {
-        const vehicle: Vehicle = {
-          id: v.id,
-          name: v.model || v.name || '',
-          manufacturer: v.make || v.manufacturer || '',
-          type: v.type || 'Electric',
-          fuelType: v.fuel_type || 'Electric',
-          range: v.range || null,
-          batteryCapacity: v.battery || null,
-          price: v.price || 0,
-          maintenanceCost: v.maintenance_cost || 0,
-          fuelSavings: v.savings_per_km ? Math.round(v.savings_per_km * 15000) : null,
-          imageUrl: v.image || '',
-          fuelEconomy: v.fuel_economy || null,
-        };
-        this.vehicles.set(v.id, vehicle);
+      const { initialVehicles } = await import('../client/src/lib/data.js');
+      initialVehicles.forEach(vehicle => {
+        this.vehicles.set(vehicle.id, vehicle);
       });
     } catch (error) {
       console.error('Error loading vehicles:', error);
