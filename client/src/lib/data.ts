@@ -159,7 +159,7 @@ export const educationalContent = [
   {
     id: 2,
     title: "Charging Guide",
-    description: "Understanding EV charging types and best practices",
+    description: "Understanding EV charging types and best practices", 
     imageUrl: "https://images.unsplash.com/photo-1669334788758-c97e6263f149"
   },
   {
