@@ -4,11 +4,6 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertVehicleSchema, insertPostSchema, insertCommentSchema } from "@shared/schema";
-import { OpenAI } from "openai";
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
 
 export function registerRoutes(app: Express): Server {
   const api = Router();
@@ -114,33 +109,11 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
-  // Chat endpoint
+  // Chat endpoint (disabled)
   api.post("/chat", async (req, res) => {
-    try {
-      try {
-        const completion = await openai.chat.completions.create({
-          messages: [
-            { role: "system", content: "You are a helpful assistant knowledgeable about electric vehicles." },
-            { role: "user", content: req.body.message }
-          ],
-          model: "gpt-3.5-turbo",
-        });
-
-        res.json({ response: completion.choices[0].message.content });
-      } catch (error: any) {
-        if (error?.status === 429) {
-          return res.status(429).json({ 
-            error: "The AI service is currently experiencing high demand. Please try again in a few minutes." 
-          });
-        }
-        throw error;
-      }
-    } catch (error) {
-      console.error("Chat error:", error);
-      res.status(500).json({ 
-        error: "Failed to process chat request. Please try again later." 
-      });
-    }
+    res.status(503).json({ 
+      error: "Chat functionality is currently disabled" 
+    });
   });
 
   app.use("/api", api);
