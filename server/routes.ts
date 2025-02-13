@@ -3,7 +3,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertVehicleSchema, insertPostSchema, insertCommentSchema } from "@shared/schema";
-import OpenAI from "openai";
+
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
@@ -78,31 +78,7 @@ export function registerRoutes(app: Express): Server {
     res.status(201).json(comment);
   });
 
-  // Chat endpoint
-  api.post("/chat", async (req, res) => {
-    try {
-      const { message } = req.body;
-      if (!message) {
-        return res.status(400).json({ error: "Message is required" });
-      }
-
-      if (!process.env.OPENAI_API_KEY) {
-        return res.status(500).json({ error: "OpenAI API key not configured" });
-      }
-
-      try {
-        const completion = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo", 
-          messages: [
-            {
-              role: "system",
-              content: "You are an expert on electric vehicles and sustainability. Provide helpful, accurate, and concise information about EVs, charging, maintenance, and related topics. Keep responses under 150 words and focus on practical advice."
-            },
-            { role: "user", content: message }
-          ],
-          temperature: 0.7,
-          max_tokens: 200,
-        });
+  
 
         res.json({ response: completion.choices[0].message.content });
       } catch (error: any) {
