@@ -1,7 +1,7 @@
 
 import type { Vehicle, ChargingStation } from "@shared/schema";
 
-// Update initial vehicles data
+// Complete vehicle data
 export const initialVehicles: Vehicle[] = [
   {
     id: 1,
@@ -78,6 +78,43 @@ export const initialVehicles: Vehicle[] = [
     maintenanceCost: 4500,
     fuelSavings: 40000,
     imageUrl: "/assets/tata_tiago_ev.jpg"
+  },
+  {
+    id: 7,
+    name: "Fortuner",
+    manufacturer: "Toyota",
+    type: "4-wheeler",
+    fuelType: "diesel",
+    fuelEconomy: 12,
+    price: 3500000,
+    maintenanceCost: 8000,
+    imageUrl: "/assets/toyota_fortuner.jpg"
+  },
+  {
+    id: 8,
+    name: "Atto 3",
+    manufacturer: "BYD",
+    type: "4-wheeler",
+    fuelType: "electric",
+    range: 521,
+    batteryCapacity: 60.48,
+    price: 3399000,
+    maintenanceCost: 8000,
+    fuelSavings: 60000,
+    imageUrl: "/assets/byd_atto3.jpg"
+  },
+  {
+    id: 9,
+    name: "eC3",
+    manufacturer: "Citroen",
+    type: "4-wheeler",
+    fuelType: "electric",
+    range: 320,
+    batteryCapacity: 29.2,
+    price: 1150000,
+    maintenanceCost: 4800,
+    fuelSavings: 45000,
+    imageUrl: "/assets/citroen_ec3.jpg"
   }
 ];
 
